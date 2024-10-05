@@ -2,6 +2,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import { sendEmail } from "./utils";
+import supabaseClient from "./supabaseClient";
 
 dotenv.config();
 
@@ -25,6 +26,12 @@ app.post("/api/email", async (req: Request, res: Response) => {
   }
 
   res.send("oki");
+app.get("/users", async (req: Request, res: Response) => {
+  const { data, error } = await supabaseClient.from("client").select();
+  if (error) {
+    res.status(400).json({ error: error.message });
+  }
+  res.status(200).json(data);
 });
 
 app.listen(port, () => {

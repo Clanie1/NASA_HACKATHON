@@ -20,12 +20,14 @@ app.post("/api/email", async (req: Request, res: Response) => {
 
   try {
     sendEmail(to, subject);
-    console.log('success');
+    console.log("success");
   } catch (e) {
-    console.log('error');
+    console.log("error");
   }
 
   res.send("oki");
+});
+
 app.get("/users", async (req: Request, res: Response) => {
   const { data, error } = await supabaseClient.from("client").select();
   if (error) {

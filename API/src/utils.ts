@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
 
 async function sendWelcomeEmail(user: any, subject: string) {
   const mailOptions = {
-    from: '"VineGuard" <vineguard.noreply@gmail.com',
+    from: '"VineGuard" <vineguard.noreply@gmail.com>',
     to: user.email,
     subject: subject,
     html: getWelcomeEmailTemplate(user.fullname),
@@ -37,7 +37,7 @@ async function sendReportEmail(
   subject: string
 ) {
   const mailOptions = {
-    from: '"VineGuard" <vineguard.noreply@gmail.com',
+    from: '"VineGuard" <vineguard.noreply@gmail.com>',
     to: user.email,
     subject: subject,
     html: getReportEmailTemplate(weatherData, disasterData, subject),

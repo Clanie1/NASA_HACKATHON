@@ -1,7 +1,6 @@
 import React from "react";
 
-import wineSketch from "../../assets/common/wine_sketch_1.png";
-import wineSketch2 from "../../assets/common/wine_sketch_2.png";
+import wineBottle from "../../assets/common/wine_bottles.png";
 
 const Home = ({ ref1, scrollToSection }) => {
   return (
@@ -30,9 +29,12 @@ const Home = ({ ref1, scrollToSection }) => {
         </div>
       </div>
 
-      <div className="w-full flex justify-between">
-        <img src={wineSketch} />
-        <img src={wineSketch2} />
+      {/* Carrusel de botellas */}
+      <div className="w-full flex justify-between absolute bottom-0">
+        <div className="carousel-inner flex opacity-20">
+          <img src={wineBottle} />
+          <img src={wineBottle} />
+        </div>
       </div>
     </div>
   );

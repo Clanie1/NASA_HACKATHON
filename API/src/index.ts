@@ -1,7 +1,7 @@
 // src/index.js
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
-import { sendEmail } from "./utils";
+import { sendWelcomeEmail } from "./utils";
 import supabaseClient from "./supabaseClient";
 import { sendGptPrompt } from "./openApi";
 import { getWheaterApiData } from "./services/weather";
@@ -22,7 +22,7 @@ app.post("/api/email", async (req: Request, res: Response) => {
   const { to, subject } = req.body;
 
   try {
-    sendEmail(to, subject);
+    sendWelcomeEmail(to, subject);
     console.log("success");
   } catch (e) {
     console.log("error");
@@ -36,16 +36,19 @@ app.get("/users", async (req: Request, res: Response) => {
   if (error) {
     res.status(400).json({ error: error.message });
   }
-  res.status(200).json(data);
+  res.send(data);
 });
 
 app.post("/createUser", async (req: Request, res: Response) => {
-  const { data, error } = await supabaseClient.from("client").insert(req.body);
+  const { error } = await supabaseClient.from("client").insert(req.body);
   if (error) {
     res.status(400).json({ error: error.message });
   }
-  res.status(200).json(data);
+  res.send("User created");
+
+  sendWelcomeEmail(req.body, "Welcome to our platform");
 });
+
 app.post("/api/gpt", async (req: Request, res: Response) => {
   const { prompt } = req.body;
   const response = sendGptPrompt(prompt);

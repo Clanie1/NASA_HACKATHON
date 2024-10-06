@@ -7,6 +7,7 @@ import { sendGptPrompt } from "./openApi";
 import { getWheaterApiData } from "./services/weather";
 import { getDisasterApiData } from "./services/disaster";
 import cors from "cors";
+import { geminiPrompt } from "./services/geminiApi";
 
 dotenv.config();
 
@@ -53,6 +54,12 @@ app.post("/api/gpt", async (req: Request, res: Response) => {
   const { prompt } = req.body;
   const response = sendGptPrompt(prompt);
   res.status(200).json(response);
+});
+
+app.post("/api/gemini", async (req: Request, res: Response) => {
+  const { prompt } = req.body;
+  const result = await geminiPrompt(prompt);
+  res.status(200).json({ result });
 });
 
 app.listen(port, () => {

@@ -31,7 +31,7 @@ const Home = ({ ref1, scrollToSection }) => {
 
       {/* Carrusel de botellas */}
       <div className="w-full flex justify-between absolute bottom-0">
-        <div className="carousel-inner flex">
+        <div className="carousel-inner flex opacity-20">
           <img src={wineBottle} />
           <img src={wineBottle} />
         </div>

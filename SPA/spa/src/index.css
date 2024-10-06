@@ -44,11 +44,13 @@ html, body {
 }
 
 .carousel-inner {
+  display: flex;
   width: 65%; 
-  animation: slide 5s infinite linear;
+  animation: slide 10s infinite linear;
 }
 
 .carousel-img {
+  opacity: 0.5;
   width: 50vw;
 }
 

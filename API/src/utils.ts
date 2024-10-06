@@ -3,6 +3,7 @@ import { getWheaterApiData } from "./services/weather";
 import { getDisasterApiData } from "./services/disaster";
 import { getWelcomeEmailTemplate } from "./templates/welcomeEmailTemplate";
 import { User } from "@supabase/supabase-js";
+import { getReportEmailTemplate } from "./templates/reportEmailTemplate";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -29,12 +30,17 @@ async function sendWelcomeEmail(user: any, subject: string) {
   }
 }
 
-async function sendReportEmail(user: any, subject: string) {
+async function sendReportEmail(
+  user: User,
+  weatherData: any,
+  disasterData: any,
+  subject: string
+) {
   const mailOptions = {
     from: '"VineGuard" <vineguard.noreply@gmail.com>',
-    to: user,
+    to: user.email,
     subject: subject,
-    html: getWelcomeEmailTemplate(user.fullname),
+    html: getReportEmailTemplate(weatherData, disasterData, subject),
   };
 
   try {
@@ -46,4 +52,4 @@ async function sendReportEmail(user: any, subject: string) {
   }
 }
 
-export { sendWelcomeEmail };
+export { sendWelcomeEmail, sendReportEmail };

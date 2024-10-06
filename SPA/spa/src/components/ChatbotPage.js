@@ -85,7 +85,9 @@ const ChatbotPage = () => {
         <div className="h-[95%] bg-white rounded-xl w-full opacity-80 flex flex-col justify-end items-center p-2">
           <div className="w-full flex flex-col justify-center items-center gap-[1px] py-3 px-6 overflow-y-auto">
             {messages.length === 0 ? (
-              <div className="text-gray-500">No messages yet.</div>
+              <div className="text-gray-500">
+                Fetching your farm information...
+              </div>
             ) : (
               messages.map((message, index) => (
                 <div
@@ -106,7 +108,7 @@ const ChatbotPage = () => {
             )}
             {loading && (
               <div className="self-start bg-gray-300 text-black p-2 rounded-xl max-w-[80%]">
-                El bot está escribiendo...
+                ...
               </div>
             )}
           </div>

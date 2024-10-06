@@ -18,7 +18,7 @@ const ChatbotPage = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          message: `Context: ${JSON.stringify(contextData)}`,
+          prompt: `Context: ${JSON.stringify(contextData)}`,
         }),
       });
 
@@ -36,7 +36,6 @@ const ChatbotPage = () => {
   };
 
   useEffect(() => {
-    console.log(id);
     fetchUserContext();
   }, [id]);
 
@@ -53,7 +52,7 @@ const ChatbotPage = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ message: input }),
+          body: JSON.stringify({ prompt: input }),
         });
 
         const data = await response.json();
@@ -83,7 +82,7 @@ const ChatbotPage = () => {
       <p className="text-4xl font-bold text-black mb-8">Ask our agent!</p>
       <div className="h-[60%] bg-main-beige rounded-xl w-[60%] flex flex-col justify-center items-end px-4 py-1">
         <div className="h-[95%] bg-white rounded-xl w-full opacity-80 flex flex-col justify-end items-center p-2">
-          <div className="w-full flex flex-col justify-center items-center gap-[1px] py-3 px-6 overflow-y-auto">
+          <div className="w-full flex flex-col justify-center items-center gap-1 py-3 px-6 overflow-y-auto">
             {messages.length === 0 ? (
               <div className="text-gray-500">
                 Fetching your farm information...

@@ -3,6 +3,8 @@ import axios from "axios";
 const getWheaterApiData = async (lat: number, lng: number) => {
   const username = "cetys_barocio_daniel";
   const password = process.env.METEOMATICS_API_PASSWORD || "";
+  console.log(username);
+  console.log(password);
 
   const headers = {
     Authorization:

@@ -60,7 +60,7 @@ app.get("/getInfoByUser/:id", async (req: Request, res: Response) => {
   if (error || !data) {
     res.status(400);
   }
-  console.log(data);
+  console.log(data, "hola");
   const weatherData = await getWheaterApiData(data.lat, data.lng);
   const disasterData = await getDisasterApiData(data.lat, data.lng);
 

@@ -11,9 +11,9 @@ const geminiPrompt = async (prompt: string) => {
   const context =
     "You are a helpful assistant that helps farmers grow their crops in a more efficient way.";
   const fullPrompt = `${context}\n\n${prompt}`;
+  console.log(fullPrompt);
 
   const result = await model.generateContent(fullPrompt);
-  console.log(result.response.text());
   return result;
 };
 

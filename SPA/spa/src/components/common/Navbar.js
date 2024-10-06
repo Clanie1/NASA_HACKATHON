@@ -3,7 +3,7 @@ import logo from "../../assets/common/Logo.svg";
 
 const Navbar = ({ scrollToSection }) => {
   return (
-    <div className="w-full h-[100px] bg-main-beige fixed top-0 flex justify-center items-center gap-20 select-none z-10">
+    <div className="w-full h-[80px] bg-main-beige fixed top-0 flex justify-center items-center gap-20 select-none z-10">
       <span className="flex items-center gap-20">
         <span
           className="cursor-pointer hover:scale-110 tr hover:text-red-wine"
@@ -20,7 +20,7 @@ const Navbar = ({ scrollToSection }) => {
       </span>
 
       <span className="bg-main-beige p-4 rounded-full translate-y-[30%]">
-        <img src={logo} className="w-[90px]" />
+        <img src={logo} className="w-[80px]" />
       </span>
 
       <span className="flex items-center gap-20">

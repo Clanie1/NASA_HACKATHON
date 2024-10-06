@@ -15,13 +15,16 @@ const sendGptPrompt = async (prompt: string) => {
         Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "gpt-4",
+        model: "gpt-3.5-turbo",
         messages: [{ role: "user", content: prompt }],
       }),
     });
 
     const data = await response.json();
-    return data.choices[0].message.content;
+    console.log(data); // Esto te dará una visión más clara de la respuesta
+    return data.choices
+      ? data.choices[0].message.content
+      : "No content available";
   } catch (e) {
     console.error("Error: ", e);
     throw new Error("Failed to fetch GPT response");

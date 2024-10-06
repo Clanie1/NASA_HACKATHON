@@ -40,7 +40,7 @@ async function sendReportEmail(
     from: '"VineGuard" <vineguard.noreply@gmail.com>',
     to: user.email,
     subject: subject,
-    html: getReportEmailTemplate(weatherData, disasterData, subject),
+    html: getReportEmailTemplate(user.id, weatherData, disasterData, subject),
   };
 
   try {

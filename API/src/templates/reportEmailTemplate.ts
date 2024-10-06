@@ -14,6 +14,7 @@ const naturalDisasterEventTypes = {
 };
 
 const getReportEmailTemplate = (
+  id: string,
   weatherData: any,
   disasterData: any,
   subject: string
@@ -408,7 +409,7 @@ table, td { color: #000000; } #u_body a { color: #0000ee; text-decoration: under
   <!--[if mso]><style>.v-button {background: transparent !important;}</style><![endif]-->
 <div align="center">
   <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:37px; v-text-anchor:middle; width:480px;" arcsize="11%"  stroke="f" fillcolor="#e0d33a"><w:anchorlock/><center style="color:#FFFFFF;"><![endif]-->
-    <a href="" target="_blank" class="v-button" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #e0d33a; border-radius: 4px;-webkit-border-radius: 4px; -moz-border-radius: 4px; width:100%; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;font-size: 14px;">
+    <a href="http://localhost:3001/chatbot/${id}" target="_blank" class="v-button" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #e0d33a; border-radius: 4px;-webkit-border-radius: 4px; -moz-border-radius: 4px; width:100%; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;font-size: 14px;">
       <span style="display:block;padding:10px 20px;line-height:120%;"><span style="line-height: 16.8px;">Go Chat!</span></span>
     </a>
     <!--[if mso]></center></v:roundrect><![endif]-->

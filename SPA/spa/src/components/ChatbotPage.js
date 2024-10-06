@@ -1,9 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-const ChatbotPage = ({ id }) => {
+const ChatbotPage = () => {
+  const { id } = useParams();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const fetchUserContext = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/getInfoByUser/${id}`);
+      const contextData = await response.json();
+
+      const geminiResponse = await fetch("http://localhost:8080/api/gemini", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: `Context: ${JSON.stringify(contextData)}`,
+        }),
+      });
+
+      const geminiData = await geminiResponse.json();
+
+      const botMessage = {
+        sender: "bot",
+        text: geminiData.result.response.candidates[0].content.parts[0].text,
+      };
+
+      setMessages([botMessage]);
+    } catch (error) {
+      console.error("Error al obtener el contexto del usuario:", error);
+    }
+  };
+
+  useEffect(() => {
+    console.log(id);
+    fetchUserContext();
+  }, [id]);
 
   const handleSendMessage = async () => {
     if (input.trim() !== "") {

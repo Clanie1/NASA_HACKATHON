@@ -21,10 +21,10 @@ const sendGptPrompt = async (prompt: string) => {
     });
 
     const data = await response.json();
-    console.log(data);
-    return data;
+    return data.choices[0].message.content;
   } catch (e) {
-    console.log("Error: ", e);
+    console.error("Error: ", e);
+    throw new Error("Failed to fetch GPT response");
   }
 };
 

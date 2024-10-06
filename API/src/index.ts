@@ -6,6 +6,7 @@ import supabaseClient from "./supabaseClient";
 import { sendGptPrompt } from "./openApi";
 import { getWheaterApiData } from "./services/weather";
 import { getDisasterApiData } from "./services/disaster";
+import cors from "cors";
 
 dotenv.config();
 
@@ -13,6 +14,8 @@ const app: Express = express();
 app.use(express.json());
 
 const port = process.env.PORT || 3000;
+
+app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");

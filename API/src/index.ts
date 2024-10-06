@@ -3,6 +3,7 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import { sendEmail } from "./utils";
 import supabaseClient from "./supabaseClient";
+import { sendGptPrompt } from "./openApi";
 
 dotenv.config();
 
@@ -35,6 +36,12 @@ app.get("/users", async (req: Request, res: Response) => {
   }
   res.status(200).json(data);
 });
+
+app.post("/api/gpt", async (req: Request, res: Response) => {
+  const { prompt } = req.body;
+  const response = sendGptPrompt(prompt);
+  res.status(200).json(response);
+})
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);

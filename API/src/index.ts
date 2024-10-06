@@ -4,7 +4,8 @@ import dotenv from "dotenv";
 import { sendEmail } from "./utils";
 import supabaseClient from "./supabaseClient";
 import { sendGptPrompt } from "./openApi";
-import axios from "axios";
+import { getWheaterApiData } from "./services/weather";
+import { getDisasterApiData } from "./services/disaster";
 
 dotenv.config();
 
@@ -52,33 +53,13 @@ app.post("/api/gpt", async (req: Request, res: Response) => {
 });
 
 app.get("/wheaterData", async (req: Request, res: Response) => {
-  const username = "cetys_barocio_daniel";
-  const password = "7dhEfh70GU";
-
-  const headers = {
-    Authorization:
-      "Basic " + Buffer.from(username + ":" + password).toString("base64"),
+  const wheaterData = await getWheaterApiData();
+  const disastersData = await getDisasterApiData();
+  const response = {
+    wheater: wheaterData,
+    disastersData: disastersData,
   };
-
-  let token = "";
-  axios
-    .get("https://login.meteomatics.com/api/v1/token", { headers })
-    .then((response) => {
-      console.log(response.data);
-      token = response.data.access_token;
-    });
-
-  res.send(token);
-
-  // axios
-  //   .get(
-  //     "https://api.meteomatics.com/2024-10-05T00:00:00Z--2024-10-06T00:00:00Z/relative_humidity_2m:p,t_2m:C/47.423336,9.377225/json?access_token=" +
-  //       token
-  //   )
-  //   .then((response) => {
-  //     console.log(response.data);
-  //     res.send(response.data);
-  //   });
+  res.send(response);
 });
 
 app.listen(port, () => {

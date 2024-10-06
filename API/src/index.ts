@@ -50,6 +50,23 @@ app.get("/reportEmail/:id", async (req: Request, res: Response) => {
   res.send({ weatherData: weatherData, disasterData: disasterData });
 });
 
+app.get("/getInfoByUser/:id", async (req: Request, res: Response) => {
+  const { data, error } = await supabaseClient
+    .from("client")
+    .select("*")
+    .eq("id", req.params.id)
+    .single();
+
+  if (error || !data) {
+    res.status(400);
+  }
+  console.log(data);
+  const weatherData = await getWheaterApiData(data.lat, data.lng);
+  const disasterData = await getDisasterApiData(data.lat, data.lng);
+
+  res.send({ weatherData: weatherData, disasterData: disasterData });
+});
+
 app.post("/api/gpt", async (req: Request, res: Response) => {
   const { prompt } = req.body;
   const response = sendGptPrompt(prompt);

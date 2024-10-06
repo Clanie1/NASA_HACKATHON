@@ -185,7 +185,9 @@ table, td { color: #000000; } #u_body a { color: #0000ee; text-decoration: under
       <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
         
   <div style="font-family: 'Montserrat',sans-serif; font-size: 14px; line-height: 140%; text-align: center; word-wrap: break-word;">
-    <p style="line-height: 140%;">LAT 47.423336       LOG 9.377225</p>
+    <p style="line-height: 140%;">LAT ${getLatitude(
+      weatherData
+    )}       LOG ${getLongitude(weatherData)}</p>
   </div>
 
       </td>
@@ -556,6 +558,32 @@ function getSunset(weatherData: any) {
   const sunsetTime = new Date(sunsetEntry.value).toISOString().substr(11, 5);
 
   return sunsetTime;
+}
+
+function getLatitude(data: any) {
+  const coordinateData = data.data[0]?.coordinates[0];
+
+  if (!coordinateData) {
+    console.error("No coordinate data found.");
+    return null;
+  }
+
+  const latitude = coordinateData.lat;
+
+  return latitude;
+}
+
+function getLongitude(data: any) {
+  const coordinateData = data.data[0]?.coordinates[0];
+
+  if (!coordinateData) {
+    console.error("No coordinate data found.");
+    return null;
+  }
+
+  const longitude = coordinateData.lon;
+
+  return longitude;
 }
 
 export { getReportEmailTemplate };
